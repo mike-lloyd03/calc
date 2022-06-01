@@ -10,3 +10,4 @@ authors = ["Mike Lloyd"]
 clap = { version = "3.1.18", features = ["derive"] }
 eval = "0.4.3"
 regex = "1.5.4"
+rink-core = "0.6.2"
