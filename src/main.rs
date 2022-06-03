@@ -47,7 +47,7 @@ fn eval_equation(equation: &str) -> String {
 }
 
 fn validate_equation(input: &str) -> bool {
-    let re = Regex::new(r"[\d\+\-\*/\s\(\)]").expect("invalid regex");
+    let re = Regex::new(r"[\d\+\-\*/\s\(\)\.]").expect("invalid regex");
     input.chars().all(|c| re.is_match(&c.to_string()))
 }
 
@@ -84,6 +84,7 @@ fn test_validate_equation() {
     assert!(validate_equation("1 + 2"));
     assert!(validate_equation("1 + 2 + 3"));
     assert!(validate_equation("1 / 2"));
+    assert!(validate_equation("10.2 / 2.5"));
     assert!(validate_equation("1 * 2"));
     assert!(validate_equation("1 - 2"));
     assert!(validate_equation("1+2"));
@@ -98,6 +99,7 @@ fn test_eval_equation() {
     assert_eq!(eval_equation("1 / 2"), "0.5");
     assert_eq!(eval_equation("1 * 2"), "2");
     assert_eq!(eval_equation("1 - 2"), "-1");
+    assert_eq!(eval_equation("10.2 / 2.5"), "4.08");
 }
 
 #[test]
