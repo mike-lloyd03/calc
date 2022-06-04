@@ -81,6 +81,6 @@ fn test_eval_conversion() {
 #[test]
 fn test_get_unit_alias() {
     assert_eq!(&get_unit_alias("in"), "inch");
-    assert_eq!(&get_unit_alias("in / sec"), "inch / sac");
+    assert_eq!(&get_unit_alias("in / sec"), "inch / sec");
     assert_eq!(&get_unit_alias("in/sec"), "inch/sec");
 }
