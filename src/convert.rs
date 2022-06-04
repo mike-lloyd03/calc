@@ -56,8 +56,7 @@ fn clean_output(output: String) -> String {
     new_output = new_output.replace("approx. ", "");
     // Remove leading fraction
     let re = Regex::new(r"^-?\d+/\d+, ").unwrap();
-    new_output = re.replace(&new_output, "").to_string();
-    new_output
+    re.replace(&new_output, "").to_string()
 }
 
 #[test]

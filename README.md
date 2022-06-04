@@ -1,6 +1,6 @@
 # calc
 
-_Do math from the command line_
+_Do math from the command line_  
 _Do everything from the command line_
 
 ## But why?
@@ -11,14 +11,16 @@ I spend 80-90% of my day working in the terminal. Sometimes I need to do math. R
 Passing an equation as an argument to the function will return the answer.
 
 ```bash
-$ calc 12 + 30
+calc 12 + 30
+
 42
 ```
 
 Quotes are only needed around the equation when using multiplication or division because the `/` and `*` characters will be expanded by your shell.
 
 ```bash
-$ calc "21 * 2"
+calc "21 * 2"
+
 42
 ```
 
@@ -31,9 +33,10 @@ To switch to unit conversion mode, use the `--convert` (`-c`) flag. Conversions 
 
 
 ```bash
-$ calc -c "3.5 -> in"
+calc -c "3.5 -> in"
+
 42 inch
 ```
 
 ### Unit Aliases
-This tool uses the [rink]() library which doesn't recognize `in` as an abbreviation for `inch`. There is some logic to handle this so you can continue to use `in` like a real American. If you find other units that aren't recognized and should be, you can add them to the `aliases` vector in the `get_unit_aliases` function in a little PR.
+This tool uses the excellent [rink](https://github.com/tiffany352/rink-rs) library which doesn't recognize `in` as an abbreviation for `inch`. There is some logic to handle this so you can continue to use `in` like a real American. If you find other units that aren't recognized and should be, you can add them to the `aliases` vector in the `get_unit_aliases` function in a little PR.
