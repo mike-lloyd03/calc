@@ -14,7 +14,7 @@ struct Cli {
     convert: bool,
 
     /// The equation or conversion to calculate. Example: 12 + 5
-    #[clap(multiple_values = true)]
+    #[clap(num_args(1..))]
     input: Vec<String>,
 }
 
@@ -28,7 +28,13 @@ fn main() {
 
     let result = match cli.convert {
         true => convert::convert(input),
-        false => eval::evaluate(input),
+        false => match eval::eval_shunting(input) {
+            Ok(r) => r,
+            Err(e) => {
+                eprint!("{}", e);
+                std::process::exit(1);
+            }
+        },
     };
     println!("{}", result);
 }
