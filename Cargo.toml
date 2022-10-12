@@ -1,12 +1,13 @@
 [package]
 name = "calc"
-version = "0.2.0"
+version = "0.2.1"
 edition = "2021"
 authors = ["Mike Lloyd"]
+description = "Run basic calculations or unit conversions"
 
 [dependencies]
 anyhow = "1.0.65"
 clap = { version = "4.0.13", features = ["derive"] }
 regex = "1.6.0"
 rink-core = "0.6.2"
-shunting = "0.1.2"
+rustyard = "0.6.0"

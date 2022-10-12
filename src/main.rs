@@ -4,8 +4,8 @@ use std::process::exit;
 mod convert;
 mod eval;
 
-/// Run basic calculations or unit conversions
 #[derive(Parser, Debug)]
+#[command(author, version, about)]
 #[clap(author, version)]
 struct Cli {
     /// Use unit conversion mode. Units can be converted by entering the number and source unit and
