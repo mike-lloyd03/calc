@@ -1,9 +1,9 @@
+use anyhow::{bail, Result};
 use regex::Regex;
 use rink_core::{one_line, simple_context};
-use std::process::exit;
 
 /// Convert the dimensioned unit to a different unit
-pub fn convert(input: &str) -> String {
+pub fn convert(input: &str) -> Result<String> {
     let re = Regex::new(
         r"(?P<val>-?\d+\.?\d*)\s?(?P<from_unit>[a-zA-Z\s/\*°^\d]+)\s(->?|to)\s(?P<to_unit>[a-zA-Z\s/\*°^\d]+)",
     )
@@ -11,8 +11,7 @@ pub fn convert(input: &str) -> String {
     let caps = match re.captures(input) {
         Some(c) => c,
         None => {
-            eprintln!("Unable to parse input. Conversion strings should be in the form: '<Value> <Unit> -> <Unit>' (e.g. '12 ft -> m')");
-            exit(1);
+            bail!("Unable to parse input. Conversion strings should be in the form: '<Value> <Unit> -> <Unit>' (e.g. '12 ft -> m')")
         }
     };
     let value = caps.name("val").unwrap().as_str();
@@ -28,10 +27,9 @@ pub fn convert(input: &str) -> String {
     // rink
     let mut ctx = simple_context().unwrap();
     match one_line(&mut ctx, &expression) {
-        Ok(r) => clean_output(r),
+        Ok(r) => Ok(clean_output(r)),
         Err(_) => {
-            eprintln!("Units are invalid");
-            exit(1);
+            bail!("Units are invalid")
         }
     }
 }
@@ -60,21 +58,22 @@ fn clean_output(output: String) -> String {
 }
 
 #[test]
-fn test_eval_conversion() {
-    assert_eq!(convert("1 ft -> inch"), "12 inch");
-    assert_eq!(convert("1 mi -> ft"), "5280 foot");
-    assert_eq!(convert("10cm -> m"), "0.1 meter");
-    assert_eq!(convert("-40 degC -> degF"), "-40 °F");
-    assert_eq!(convert("100 kph -> mph"), "62.13711 mph");
-    assert_eq!(convert("100 km/hr -> mi/hr"), "62.13711 mile / hour");
-    assert_eq!(convert("1 ft - inch"), "12 inch");
-    assert_eq!(convert("1 ft to inch"), "12 inch");
-    assert_eq!(convert("12 in -> ft"), "1 foot");
-    assert_eq!(convert("12 in/s -> mph"), "0.6818181 mph");
-    assert_eq!(convert("-12 in/s -> mph"), "-0.6818181 mph");
-    assert_eq!(convert("12 in / s -> mph"), "0.6818181 mph");
-    assert_eq!(convert("12 ft * lbf -> N * m"), "16.26981 meter newton");
-    assert_eq!(convert("1400 ft^2 -> m^2"), "130.0642 meter^2");
+fn test_eval_conversion() -> Result<()> {
+    assert_eq!(convert("1 ft -> inch")?, "12 inch");
+    assert_eq!(convert("1 mi -> ft")?, "5280 foot");
+    assert_eq!(convert("10cm -> m")?, "0.1 meter");
+    assert_eq!(convert("-40 degC -> degF")?, "-40 °F");
+    assert_eq!(convert("100 kph -> mph")?, "62.13711 mph");
+    assert_eq!(convert("100 km/hr -> mi/hr")?, "62.13711 mile / hour");
+    assert_eq!(convert("1 ft - inch")?, "12 inch");
+    assert_eq!(convert("1 ft to inch")?, "12 inch");
+    assert_eq!(convert("12 in -> ft")?, "1 foot");
+    assert_eq!(convert("12 in/s -> mph")?, "0.6818181 mph");
+    assert_eq!(convert("-12 in/s -> mph")?, "-0.6818181 mph");
+    assert_eq!(convert("12 in / s -> mph")?, "0.6818181 mph");
+    assert_eq!(convert("12 ft * lbf -> N * m")?, "16.26981 meter newton");
+    assert_eq!(convert("1400 ft^2 -> m^2")?, "130.0642 meter^2");
+    Ok(())
 }
 
 #[test]

@@ -7,7 +7,7 @@ pub fn eval_shunting(equation: &str) -> Result<String> {
 
     let result = sy
         .calculate(equation)
-        .map_err(|e| Error::msg(e.join(";")))?;
+        .map_err(|e| Error::msg(e.join("; ")))?;
 
     Ok(format!("{}", result))
 }
