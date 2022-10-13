@@ -32,7 +32,7 @@ Examples:
 
 Interactive
 
-Launching the app without any arguments goes into interactive mode. This will launch a REPL where you can enter any series of expressions to be evaluating. Converting between units can also be achieved by prefixing any line with `convert` and entering the expression.
+Launching the app without any arguments goes into interactive mode. This will launch a REPL where you can enter any series of expressions to be evaluating. Converting between units can also be achieved by prefixing any line with `convert` and entering the expression. The REPL can be exited with Ctrl-C, typing "quit", "exit", or ":q".
 "#;
 
 #[derive(Parser, Debug)]
@@ -63,6 +63,6 @@ fn main() {
 }
 
 fn end(error: impl Display) -> ! {
-    eprint!("{}", error);
+    eprintln!("{}", error);
     exit(1)
 }

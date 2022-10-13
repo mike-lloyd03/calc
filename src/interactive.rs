@@ -12,7 +12,6 @@ pub fn repl() -> Result<()> {
     let prompt = format!("{} ", ">".red());
 
     println!("{}", "Calc Interactive Editor".blue().bold());
-    println!("Ctrl-C to exit");
 
     loop {
         let readline = rl.readline(&prompt);

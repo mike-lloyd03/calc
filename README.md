@@ -3,6 +3,8 @@
 _Do math from the command line_  
 _Do everything from the command line_
 
+![Example](docs/example.png)
+
 ## But why?
 
 I spend 80-90% of my day working in the terminal. Sometimes I need to do math. Rather than getting my phone out or trying to remember how to do math with bash's wacky syntax, why not have a CLI tool that will do simple math stuff for me? And why not write it in Rust?
@@ -53,9 +55,13 @@ calc -c "3.5 -> in"
 42 inch
 ```
 
-### Unit Aliases
+#### Unit Aliases
 
 This tool uses the excellent [rink](https://github.com/tiffany352/rink-rs) library which doesn't recognize `in` as an abbreviation for `inch`. There is some logic to handle this so you can continue to use `in` like a real American. If you find other units that aren't recognized and should be, you can add them to the `aliases` vector in the `get_unit_aliases` function in a little PR.
+
+### Interactive Mode
+
+Launching the app without any arguments goes into interactive mode. This will launch a REPL where you can enter any series of expressions to be evaluating. Converting between units can also be achieved by prefixing any line with `convert` and entering the expression. The REPL can be exited with Ctrl-C, typing "quit", "exit", or ":q" if you don't like exiting things easily.
 
 ## Thanks
 
