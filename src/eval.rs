@@ -6,11 +6,7 @@ use rustyard::ShuntingYard;
 pub fn eval_shunting(equation: &str) -> Result<String> {
     let mut sy = ShuntingYard::new();
 
-    println!("equation before: {}", equation);
-
     let equation = &prepend_zero(equation);
-
-    println!("equation after: {}", equation);
 
     let result = sy
         .calculate(equation)
