@@ -1,6 +1,6 @@
 [package]
 name = "calc"
-version = "0.2.3"
+version = "0.2.5"
 edition = "2021"
 authors = ["Mike Lloyd"]
 description = "Run basic calculations or unit conversions"
@@ -9,6 +9,7 @@ description = "Run basic calculations or unit conversions"
 anyhow = "1.0.65"
 clap = { version = "4.0.13", features = ["derive"] }
 colored = "2.0.0"
+fancy-regex = "0.10.0"
 regex = "1.6.0"
 rink-core = "0.6.2"
 rustyard = "0.6.0"
