@@ -78,7 +78,6 @@ dependencies = [
  "clap",
  "colored",
  "fancy-regex",
- "regex",
  "rink-core",
  "rustyard",
  "rustyline",

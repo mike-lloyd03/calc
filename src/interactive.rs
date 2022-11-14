@@ -24,13 +24,13 @@ pub fn repl() -> Result<()> {
 
                     let lower = line.to_lowercase();
                     let (_, input) = lower.split_at("connect ".len());
-                    let result = convert(input).unwrap_or_else(|e| format_error(e));
+                    let result = convert(input).unwrap_or_else(format_error);
 
                     println!("{}", result);
                 } else {
                     rl.add_history_entry(&line);
 
-                    let result = eval_shunting(&line).unwrap_or_else(|e| format_error(e));
+                    let result = eval_shunting(&line).unwrap_or_else(format_error);
 
                     println!("{}", result);
                 }

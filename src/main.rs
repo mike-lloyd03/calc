@@ -7,7 +7,7 @@ mod convert;
 mod eval;
 mod interactive;
 
-static ABOUT: &'static str = r#"
+static ABOUT: &str = r#"
 Command line calculator
 
 This tool has three modes: evaluating math expressions, converting between units, and interactive mode.

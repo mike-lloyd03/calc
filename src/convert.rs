@@ -1,5 +1,5 @@
 use anyhow::{bail, Result};
-use regex::Regex;
+use fancy_regex::Regex;
 use rink_core::{one_line, simple_context};
 
 /// Convert the dimensioned unit to a different unit
@@ -9,8 +9,8 @@ pub fn convert(input: &str) -> Result<String> {
     )
     .expect("invalid regex");
     let caps = match re.captures(input) {
-        Some(c) => c,
-        None => {
+        Ok(c) => c.expect("captures should be Some"),
+        Err(_) => {
             bail!("Unable to parse input. Conversion strings should be in the form: '<Value> <Unit> -> <Unit>' (e.g. '12 ft -> m')")
         }
     };
