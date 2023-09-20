@@ -9,8 +9,8 @@ pub fn convert(input: &str) -> Result<String> {
     )
     .expect("invalid regex");
     let caps = match re.captures(input) {
-        Ok(c) => c.expect("captures should be Some"),
-        Err(_) => {
+        Ok(Some(c)) => c,
+        _ => {
             bail!("Unable to parse input. Conversion strings should be in the form: '<Value> <Unit> -> <Unit>' (e.g. '12 ft -> m')")
         }
     };
